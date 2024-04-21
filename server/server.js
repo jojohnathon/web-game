@@ -5,7 +5,7 @@ let Player = require("./Player");
 const app = require('express')();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-console.log('The server is now running at http://localhost/');
+console.log('The server is now running at http://localhost:8080/');
 app.use(express.static("public"));
 
 let players = [];
@@ -27,6 +27,6 @@ function updateGame() {
   io.emit("heartbeat", players);
 }
 
-server.listen(80);
+server.listen(8080);
 
 

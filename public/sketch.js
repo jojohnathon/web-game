@@ -1,4 +1,4 @@
-const socket = io('http://localhost');
+const socket = io('http://localhost:8080');
 
 let players = [];
 socket.on("heartbeat", players => updatePlayers(players));
