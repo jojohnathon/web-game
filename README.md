@@ -1,8 +1,11 @@
 
-## How to use
+## How to run
 1. use live server extension https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer
 2. click go live in the bottom right
 3. bazinga
+
+## Web preview
+https://web-game-delta.vercel.app/
 
 ## Resources
 
