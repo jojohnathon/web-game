@@ -7,4 +7,5 @@
 ## Resources
 
 https://p5party.netlify.app/
+
 https://www.notion.so/Welcome-to-p5-party-887564cad8ec455e9bee994362322f2e
