@@ -1,6 +1,8 @@
 let shared;
 let textures;
 
+let player;
+
 // These are the four numbers that define the transform, i hat and j hat
 const i_x = 1;
 const i_y = 0.5;
@@ -27,21 +29,26 @@ function setup() {
   createCanvas(1920, 1080);
   // TODO create fullscreen button
 
-  textures.resize(w, h)
+  // textures.resize(w, h)
+  world.gravity.y = 30
+
+  player = createSprite(width / 2, height / 2, 50, 50)
+  // player.rotationLock = true;
 }
 
-function mousePressed() {
-  shared.x = mouseX;
-  shared.y = mouseY;
-}
+// function mousePressed() {
+//   shared.x = mouseX;
+//   shared.y = mouseY;
+// }
 
 
 function draw() {
-  background(255);
+  clear();
+
+  background(135);
   translate(width / 2, height / 4);
 
   // ellipse(shared.x, shared.y, 100, 100);
-
 
   for(let i = 0; i < 10; i++){
     for(let j = 0; j < 10; j++){
@@ -49,6 +56,13 @@ function draw() {
       image(textures, tsc.x, tsc.y)
     }
   }
+  
+  rect(player.x, player.y, player.width, player.height);
+
+
+  camera.x = player.x
+  if (kb.pressing('d')) { player.x += 3; console.log("d")}
+  if (kb.pressing('a')) { player.x -= 3; console.log("a")}
 }
 
 
