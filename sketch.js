@@ -133,7 +133,7 @@ function draw() {
   // rect(playerCoords.x, playerCoords.y, w, h);
  
 
-  camera.x = player.x
+  camera.x = player.x + 200
   camera.y = player.y
 
   // Handle player movement
