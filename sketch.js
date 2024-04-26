@@ -57,21 +57,44 @@ function getSpriteCoordinates(index, spriteWidth, spriteHeight, sheetWidth, shee
 }
 
 function setup() {
-  createCanvas(400, 288, 'pixelated');
+  createCanvas(400, 400, 'pixelated');
   // TODO create fullscreen button
 
   world.gravity.y = 0
   allSprites.pixelPerfect = true;
   player.rotationLock = true;
+
+  player.layer = 10;
+  player.debug = true;
  
   spriteCoords = getSpriteCoordinates(0, 72, 72, 720, 720)
   tile = textures.get(spriteCoords.x, spriteCoords.y, w, h)
-  // tile.copy(textures, spriteCoords.x, spriteCoords.y, w, h, 0, 0, w, h)
+  tileSprite = new Group()
+  tileSprite.img = tile;
+  tileSprite.collider = 'none'
+  tileSprite.layer = 1
+  tileSprite.debug = false
+  allSprites.autoCull = false
 
-  grass = new Group();
-  grass.collider = 'none';
-  grass.img = tile;
-  grass.tile = 'g';
+  // camera.zoom = 4
+
+
+
+  // tile.copy(textures, spriteCoords.x, spriteCoords.y, w, h, 0, 0, w, h)
+  for(let i = -20; i < 40; i++){
+    for(let j = 0; j < 40; j++){
+      let tsc = to_screen_coordinate({x: i, y: j});
+      // image(tile, tsc.x, tsc.y)
+      asdf = new tileSprite.Sprite()
+
+      asdf.x = tsc.x
+      asdf.y = tsc.y
+    }
+  }
+  // grass = new Group();
+  // grass.collider = 'none';
+  // grass.img = tile;
+  // grass.tile = 'g';
 
   const mapGrid = [
     'ggggggggggggggggggggggggggggggggggggggggggggggggggggg',
@@ -83,7 +106,7 @@ function setup() {
   // new Tiles(mapGrid, 0, 0, 72, 72)
 
   let floor = new Sprite(250, 200, 300, 40);
-  rotate(radians(30));
+  // rotate(radians(30));
 
 }
 
@@ -116,7 +139,7 @@ function draw() {
   clear();
 
   background(135);
-  translate(width / 2, height / 4);
+  translate(0, 0);
 
   // ellipse(shared.x, shared.y, 100, 100);
 
@@ -124,23 +147,26 @@ function draw() {
   for(let i = 0; i < grid.length; i++){
     for(let j = 0; j < grid[i].length; j++){
       let tsc = to_screen_coordinate({x: i, y: j});
-      image(tile, tsc.x, tsc.y)
+      // image(tile, tsc.x, tsc.y)
     }
   }
+  // new Sprite(player.x, player.y, 10)
 
 
 
   let playerCoords = to_screen_coordinate({x: player.x, y: player.y})
-  // rect(playerCoords.x, playerCoords.y, w, h);
- 
+  rect(playerCoords.x, playerCoords.y, w, h);
+  // new Sprite(player.x, player.y, 10)
+  console.log(`${playerCoords.x} ${playerCoords.y}`)
 
-  // camera.x = player.x + 200
-  // camera.y = player.y
+  camera.x = player.x
+  camera.y = player.y
 
   // Handle player movement
   const playerSpeed = 1
   if (kb.pressing('right')) { 
     player.x += playerSpeed;
+    //maybe update player x with tsc here
     player.changeAni('walkD') }
   if (kb.pressing('left')) { 
     player.x -= playerSpeed;
@@ -151,6 +177,19 @@ function draw() {
   if (kb.pressing('down')) { 
     player.y += playerSpeed;
     player.changeAni('walkS') }
+
+  if (kb.released('right')) {
+    player.changeAni('idle')
+  }
+  if (kb.released('left')) {
+    player.changeAni('idle')
+  }
+  if (kb.released('up')) {
+    player.changeAni('idle')
+  }
+  if (kb.released('down')) {
+    player.changeAni('idle')
+  }
 }
 
 
@@ -166,4 +205,8 @@ function to_screen_coordinate(tile) {
     x: tile.x * i_x * 0.5 * w + tile.y * j_x * 0.5 * w,
     y: tile.x * i_y * 0.5 * h + tile.y * j_y * 0.5 * h,
   }
+}
+
+function mousePressed() {
+  console.log(mouse.y, mouse.y)
 }
