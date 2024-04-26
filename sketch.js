@@ -70,7 +70,7 @@ function setup() {
 
   grass = new Group();
   grass.collider = 'none';
-  grass.spriteSheet = tile;
+  grass.img = tile;
   grass.tile = 'g';
 
   const mapGrid = [
@@ -80,9 +80,10 @@ function setup() {
     'ggggggggggggggggggggggggggggggggggggggggggggggggggggg',
     'ggggggggggggggggggggggggggggggggggggggggggggggggggggg'
   ]
-  new Tiles(mapGrid, 0, 0, 72, 72)
+  // new Tiles(mapGrid, 0, 0, 72, 72)
 
-  let floor = new Sprite(250, 200, 300, 40, 'static');
+  let floor = new Sprite(250, 200, 300, 40);
+  rotate(radians(30));
 
 }
 
@@ -133,8 +134,8 @@ function draw() {
   // rect(playerCoords.x, playerCoords.y, w, h);
  
 
-  camera.x = player.x + 200
-  camera.y = player.y
+  // camera.x = player.x + 200
+  // camera.y = player.y
 
   // Handle player movement
   const playerSpeed = 1
